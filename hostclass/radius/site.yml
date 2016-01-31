@@ -1,0 +1,5 @@
+---
+- hosts: radius
+  roles: 
+    - common
+    - freeradius

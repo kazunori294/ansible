@@ -1,0 +1,25 @@
+---
+- name: install freeradius freeradius-ldap freeradius-utils
+  yum: name={{item}}  state=present
+  with_items:
+  - freeradius
+  - freeradius-ldap
+  - freeradius-utils 
+
+- name: set /etc/raddb/clients.conf
+  template: src=clients.conf.j2 dest=/etc/raddb/clients.conf owner=root group=radiusd mode=0640
+
+- name: set /etc/raddb/sites-available/default
+  template: src=default.j2 dest=/etc/raddb/sites-available/default owner=root group=radiusd mode=0640
+
+- name: set /etc/raddb/dictionary
+  template: src=dictionary.j2 dest=/etc/raddb/dictionary owner=root group=radiusd mode=0644
+
+- name: set /etc/raddb/modules/ldap
+  template: src=ldap.j2 dest=/etc/raddb/modules/ldap owner=root group=radiusd mode=0640
+
+- name: set /etc/raddb/users
+  template: src=users.j2 dest=/etc/raddb/users owner=root group=radiusd mode=0640
+
+- name: service radiusd restart
+  service: name=radiusd state=restarted enabled=yes

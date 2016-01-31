@@ -1,0 +1,7 @@
+---
+ - include: glusterfs.yml 
+ - include: httpd.yml
+ - include: ldap.yml
+ - include: mysqld.yml
+ - include: ping.yml
+ - include: sudo.yml

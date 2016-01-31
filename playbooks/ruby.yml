@@ -1,0 +1,37 @@
+---
+- hosts: server
+  tasks:
+   - name: install git
+     yum: name={{item}}  state=present
+     with_items:
+       - git
+       - openssl-devel
+       - readline-devel
+       - zlib-devel
+       - gcc
+       - sqlite-devel
+       - gcc-c++
+
+   - name: aaa
+     git: repo=https://github.com/sstephenson/rbenv.git dest=~/.rbenv
+
+   - name: bbb
+     shell: echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+
+   - name: ccc
+     shell: echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+
+   - name: ddd
+     shell: source ~/.bash_profile
+
+   - name: eee
+     git: repo=https://github.com/sstephenson/ruby-build.git dest=~/.rbenv/plugins/ruby-build
+
+   - name: fff
+     shell: /root/.rbenv/bin/rbenv install 2.2.4
+
+   - name: ggg
+     shell: /root/.rbenv/bin/rbenv global 2.2.4
+
+#   - name: hhh
+#     shell: /root/.rbenv/bin/rbenv exec gem install bundler

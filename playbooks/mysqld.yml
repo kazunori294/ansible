@@ -1,0 +1,14 @@
+---
+- hosts: servers
+  vars:
+     p1: mysqld
+  remote_user: root
+  tasks: 
+   - name: install mysql-server
+     yum: name=mysql-server state=present 
+  
+   - name: service mysqld start
+     service: name={{p1}} state=started
+
+   - name: chkconfig mysqld on
+     service: name={{p1}} enabled=yes

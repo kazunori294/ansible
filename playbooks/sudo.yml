@@ -1,0 +1,11 @@
+---
+- hosts: servers
+  remote_user: root
+  tasks: 
+   - name: add kazunori as sudo user
+     copy: >
+         src=/etc/ansible/files/kazunori
+         dest=/etc/sudoers.d/kazunori
+         owner=root
+         group=root
+         mode=0644

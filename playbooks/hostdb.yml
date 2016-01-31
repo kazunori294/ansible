@@ -1,0 +1,30 @@
+---
+- hosts: host
+  remote_user: root
+  tasks:
+#   - name: test
+#     shell: echo {{ ansible_eth0.ipv4.address }} > /tmp/test.txt
+
+   - name: update ip
+     shell: curl http://10.1.0.54/api/hosts/update/{{ ansible_eth0.ipv4.address }}/ipaddress
+
+   - name: update hostname
+     shell: curl http://10.1.0.54/api/hosts/update/{{ ansible_eth0.ipv4.address }}/ip/{{ ansible_fqdn }}/hostname
+
+#   - name: update hostclass
+#     shell: curl http://10.1.0.54/api/hosts/update/{{ ansible_eth0.ipv4.address }}/ip/{{ ansible_eth0.ipv4.address }}/ipaddress
+
+   - name: update os
+     shell: curl http://10.1.0.54/api/hosts/update/{{ ansible_eth0.ipv4.address }}/ip/{{ ansible_distribution }}/os
+
+   - name: update cpu_num
+     shell: curl http://10.1.0.54/api/hosts/update/{{ ansible_eth0.ipv4.address }}/ip/{{ ansible_processor_count }}/cpu_num
+
+   - name: update cpu_model
+     shell: curl http://10.1.0.54/api/hosts/update/{{ ansible_eth0.ipv4.address }}/ip/{{ ansible_processor[0] }}/cpu_model
+
+   - name: update memory
+     shell: curl http://10.1.0.54/api/hosts/update/{{ ansible_eth0.ipv4.address }}/ip/{{ ansible_memory_mb.real.total }}/memory
+
+   - name: update subnet
+     shell: curl http://10.1.0.54/api/hosts/update/{{ ansible_eth0.ipv4.address }}/ip/{{ ansible_eth0.ipv4.netmask }}/subnet

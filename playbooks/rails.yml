@@ -1,0 +1,5 @@
+---
+- hosts: server
+  tasks:
+   - name: gem install rails
+     gem: name=rails state=present executable=.rbenv/shims/gem

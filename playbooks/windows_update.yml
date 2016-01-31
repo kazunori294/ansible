@@ -1,0 +1,11 @@
+---
+- hosts: windows
+  tasks: 
+   - name: Install all security, critical, and rollup updates
+     win_updates: 
+  
+#   - name: Search all security, critical, and rollup updates
+#     win_updates: status=searched
+
+
+

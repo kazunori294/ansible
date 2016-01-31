@@ -1,0 +1,13 @@
+---
+- hosts: host
+  
+  vars_files:
+  - /tmp/changeHostname.yml
+
+  tasks:
+   - name: change hostname
+     shell: echo HOSTNAME={{ hostname }} > /etc/sysconfig/network 
+
+   - name: set hostname
+     shell: hostname {{ hostname }}
+ 

@@ -1,0 +1,14 @@
+---
+- hosts: servers
+  vars:
+     p1: httpd
+  remote_user: root
+  tasks: 
+   - name: yum install httpd
+     yum: name={{p1}} state=present 
+  
+   - name: service httpd start
+     service: name={{p1}} state=started
+
+   - name: chkconfig httpd on
+     service: name=httpd enabled=yes

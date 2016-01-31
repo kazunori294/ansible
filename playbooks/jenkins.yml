@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  remote_user: root
+  tasks:
+   - name: check epel file
+     stat: path=/etc/yum.repos.d/jenkins.repo
+     register: is_file_repo
+
+   - name: download jenkins.repo
+     shell: wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+     when: is_file_repo.stat.md5 is not defined
+
+   - name: import rpm
+     shell: rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+     when: is_file_repo.stat.md5 is not defined
+
+   - name: yum_install_packages
+     yum: name={{item}}  state=present
+     with_items:
+      - java-1.7.0-openjdk
+      - jenkins
+
+   - name: service start
+     service: name=jenkins state=started
+
+   - name: chkconfig on
+     service: name=jenkins enabled=yes
+
+   - name: add jenkins as sudo user
+     copy: >
+         src=/etc/ansible/files/jenkins
+         dest=/etc/sudoers.d/jenkins
+         owner=root
+         group=root
+         mode=0644

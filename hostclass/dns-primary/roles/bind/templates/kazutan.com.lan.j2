@@ -1,0 +1,10 @@
+$TTL    86400
+@       IN      SOA     kazutan.com. root.kazutan.com.(
+                        2007031400      ; serial
+                        3600            ; refresh (1 hour)
+                        900             ; retry (15 minutes)
+                        604800          ; expire (1 week)
+                        86400           ; negative (1 day)
+)
+              IN      NS              {{ ansible_hostname }}.kazutan.com.
+{{ ansible_hostname }}        IN      A               {{ ansible_eth0.ipv4.address }}

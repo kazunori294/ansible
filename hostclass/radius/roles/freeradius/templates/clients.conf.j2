@@ -1,0 +1,18 @@
+client 10.0.0.0/8 {
+       secret          = radiuspassword
+       shortname       = radius
+       }
+
+client 192.168.0.0/16 {
+       secret          = radiuspassword
+       shortname       = radius
+       }
+
+
+
+
+client localhost {
+        ipaddr = 127.0.0.1
+        secret          = testing123
+        require_message_authenticator = no
+}

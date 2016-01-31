@@ -1,0 +1,9 @@
+---
+   - name: yum install httpd
+     yum: name=httpd state=present 
+  
+   - name: service httpd start
+     service: name=httpd state=started
+
+   - name: chkconfig httpd on
+     service: name=httpd enabled=yes

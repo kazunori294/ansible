@@ -1,0 +1,5 @@
+---
+- hosts: class1
+  roles: 
+    - common
+    - httpd

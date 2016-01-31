@@ -1,0 +1,34 @@
+---
+- hosts: servers
+  vars:
+     p1: glusterd
+  remote_user: root
+  tasks:
+   - name: check epel file
+     stat: path=/tmp/epel-release-latest-6.noarch.rpm
+     register: is_file_epel
+
+   - name: download epel
+     shell: wget -P /tmp http://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm && rpm -ivh /tmp/epel-release-latest-6.noarch.rpm
+     when: is_file_epel.stat.md5 is not defined
+
+   - name: check glusterfs-epel.repo
+     stat: path=/etc/yum.repos.d/glusterfs-epel.repo
+     register: is_file_glusterfs
+
+   - name: download glusterfs-epel.repo
+     shell: wget -P /etc/yum.repos.d http://download.gluster.org/pub/gluster/glusterfs/LATEST/EPEL.repo/glusterfs-epel.repo
+     when: is_file_glusterfs.stat.md5 is not defined
+
+   - name: yum_install_packages
+     yum: name={{item}}  state=present
+     with_items:
+      - glusterfs
+      - glusterfs-server
+      - glusterfs-fuse
+
+   - name: service start
+     service: name={{p1}} state=started
+
+   - name: chkconfig on
+     service: name={{p1}} enabled=yes
