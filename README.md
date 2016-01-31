@@ -4,8 +4,8 @@
 
 ```
 HOSTCLASS=xxxxxx
-ansible-playbook -i /etc/ansible/hosts /etc/ansible/hostclass/${HOSTCLASS}/site.yml --check
-ansible-playbook -i /etc/ansible/hosts /etc/ansible/hostclass/${HOSTCLASS}/site.yml
+ansible-playbook -i /etc/ansible/hosts/${HOSTCLASS} /etc/ansible/hostclass/${HOSTCLASS}/site.yml --check
+ansible-playbook -i /etc/ansible/hosts/${HOSTCLASS} /etc/ansible/hostclass/${HOSTCLASS}/site.yml
 ```
 
 
