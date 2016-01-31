@@ -12,10 +12,10 @@ ansible-playbook -i /etc/ansible/hosts/${HOSTCLASS} /etc/ansible/hostclass/${HOS
 ### test deployment
 ```
 HOSTCLASS=xxxxxx
-
+TARGET=yyyyyy
 cat << EOF   > /tmp/testhosts
-[${HOSTCLASS}]
-ip address
+[hosts]
+${TARGET}
 EOF
 
 ansible-playbook -i /tmp/testhosts /etc/ansible/hostclass/${HOSTCLASS}/site.yml --check
