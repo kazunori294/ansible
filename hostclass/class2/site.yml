@@ -1,4 +1,4 @@
 ---
-- hosts: class1
+- hosts: hosts
   roles: 
     - httpd

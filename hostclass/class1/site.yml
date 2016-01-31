@@ -1,5 +1,5 @@
 ---
-- hosts: class1
+- hosts: hosts
   roles: 
     - common
     - httpd

@@ -1,5 +1,5 @@
 ---
-- hosts: dns-primary
+- hosts: hosts
   roles: 
     - common
     - bind

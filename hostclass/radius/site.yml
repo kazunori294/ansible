@@ -1,5 +1,5 @@
 ---
-- hosts: radius
+- hosts: hosts
   roles: 
     - common
     - freeradius
